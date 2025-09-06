@@ -37,6 +37,11 @@ class MainActivity : ComponentActivity() {
                             registro = { navController.navigate("login") }
                         )
                     }
+                    
+                    // Tela Lista de alimentos
+                    composable("foodlist") {
+                    FoodListScreen()
+                }
                 }
             }
         }
