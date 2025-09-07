@@ -8,8 +8,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import br.com.fiap.ecoplate.screens.CadastroUsuarioScreen
+import br.com.fiap.ecoplate.screens.DashboardScreen
 import br.com.fiap.ecoplate.screens.LoginUsuarioScreen
 import br.com.fiap.ecoplate.ui.theme.EcoPlateTheme
+import com.example.foodlist.FoodListScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,8 +29,20 @@ class MainActivity : ComponentActivity() {
                     composable("login") {
                         LoginUsuarioScreen(
                             cadrastoUsuario = { navController.navigate("cadastro") },
-                            loginUsuario = { navController.navigate("login") },
-                            entrarConvidado = { navController.navigate("login") }
+                            loginUsuario = {
+                                navController.navigate("dashboard") {
+                                    popUpTo("login") {
+                                        inclusive = true
+                                    }
+                                }
+                            },
+                            entrarConvidado = {
+                                navController.navigate("dashboard") {
+                                    popUpTo("login") {
+                                        inclusive = true
+                                    }
+                                }
+                            }
                         )
                     }
                     // Tela de Cadastro
@@ -37,15 +51,18 @@ class MainActivity : ComponentActivity() {
                             registro = { navController.navigate("login") }
                         )
                     }
-                    
+                    // Tela Dashboard
+                    composable("dashboard") {
+                        DashboardScreen()
+                    }
+
                     // Tela Lista de alimentos
                     composable("foodlist") {
-                    FoodListScreen()
-                }
+                        FoodListScreen()
+                    }
                 }
             }
         }
     }
 }
-
 
