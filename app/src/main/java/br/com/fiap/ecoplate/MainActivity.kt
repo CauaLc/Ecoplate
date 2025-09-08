@@ -9,6 +9,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import br.com.fiap.ecoplate.screens.*
 import br.com.fiap.ecoplate.ui.theme.EcoPlateTheme
+import com.example.foodlist.FoodListScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

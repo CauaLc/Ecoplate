@@ -17,6 +17,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.example.foodlist.StatusChip
 
 // Cores definidas no DashboardScreen para consistência
 val Green = Color(0xFF4CAF50)

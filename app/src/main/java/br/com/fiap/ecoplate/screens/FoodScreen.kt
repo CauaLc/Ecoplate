@@ -32,6 +32,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import br.com.fiap.ecoplate.R
 
 
 data class FoodItem(
@@ -44,7 +46,7 @@ data class FoodItem(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FoodListScreen() {
+fun FoodListScreen(navController: NavHostController) {
     val foods = listOf(
         FoodItem("Rúcula", "R$ 10,50", "29/09/2025", "Fresco", Color(0xFF4CAF50)),
         FoodItem("Abóbora", "R$ 5,20", "30/08/2025", "Próximo da Val", Color(0xFF8D6E63)),
@@ -61,7 +63,7 @@ fun FoodListScreen() {
                 title = {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Image(
-                            painter = painterResource(id = R.drawable.vector), // nome do arquivo gerado
+                            painter = painterResource(id = R.drawable.logo), // nome do arquivo gerado
                             contentDescription = "Meu ícone",
                             modifier = Modifier.size(36.dp).background(Color(0xFFF8F9FA))
                         )
