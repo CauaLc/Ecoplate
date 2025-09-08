@@ -7,9 +7,10 @@ import androidx.activity.enableEdgeToEdge
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import br.com.fiap.ecoplate.screens.*
+import br.com.fiap.ecoplate.screens.CadastroUsuarioScreen
+import br.com.fiap.ecoplate.screens.DashboardScreen
+import br.com.fiap.ecoplate.screens.LoginUsuarioScreen
 import br.com.fiap.ecoplate.ui.theme.EcoPlateTheme
-import com.example.foodlist.FoodListScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,44 +19,33 @@ class MainActivity : ComponentActivity() {
         setContent {
             EcoPlateTheme {
                 val navController = rememberNavController()
-
                 NavHost(
                     navController = navController,
                     startDestination = "login"
                 ) {
-                    // Tela de Login
                     composable("login") {
                         LoginUsuarioScreen(
                             cadrastoUsuario = { navController.navigate("cadastro") },
                             loginUsuario = {
-                                navController.navigate("dashboard") {
+                                navController.navigate("dashboard") { // Navega para a rota "dashboard"
                                     popUpTo("login") { inclusive = true }
                                 }
                             },
                             entrarConvidado = {
-                                navController.navigate("dashboard") {
+                                navController.navigate("dashboard") { // Navega para a rota "dashboard"
                                     popUpTo("login") { inclusive = true }
                                 }
                             }
                         )
                     }
-                    // Tela de Cadastro
                     composable("cadastro") {
                         CadastroUsuarioScreen(
                             registro = { navController.navigate("login") }
                         )
                     }
-                    // Tela Dashboard
+
                     composable("dashboard") {
-                        DashboardScreen(navController = navController)
-                    }
-                    // Tela Lista de alimentos
-                    composable("foodlist") {
-                        FoodListScreen(navController = navController)
-                    }
-                    // Tela Relatórios
-                    composable("reports_screen") {
-                        ReportsScreen(navController = navController)
+                        DashboardScreen(mainNavController = navController)
                     }
                 }
             }
