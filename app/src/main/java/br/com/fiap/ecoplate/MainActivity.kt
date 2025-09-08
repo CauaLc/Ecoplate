@@ -7,11 +7,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import br.com.fiap.ecoplate.screens.CadastroUsuarioScreen
-import br.com.fiap.ecoplate.screens.DashboardScreen
-import br.com.fiap.ecoplate.screens.LoginUsuarioScreen
+import br.com.fiap.ecoplate.screens.*
 import br.com.fiap.ecoplate.ui.theme.EcoPlateTheme
-import com.example.foodlist.FoodListScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,16 +28,12 @@ class MainActivity : ComponentActivity() {
                             cadrastoUsuario = { navController.navigate("cadastro") },
                             loginUsuario = {
                                 navController.navigate("dashboard") {
-                                    popUpTo("login") {
-                                        inclusive = true
-                                    }
+                                    popUpTo("login") { inclusive = true }
                                 }
                             },
                             entrarConvidado = {
                                 navController.navigate("dashboard") {
-                                    popUpTo("login") {
-                                        inclusive = true
-                                    }
+                                    popUpTo("login") { inclusive = true }
                                 }
                             }
                         )
@@ -53,16 +46,18 @@ class MainActivity : ComponentActivity() {
                     }
                     // Tela Dashboard
                     composable("dashboard") {
-                        DashboardScreen()
+                        DashboardScreen(navController = navController)
                     }
-
                     // Tela Lista de alimentos
                     composable("foodlist") {
-                        FoodListScreen()
+                        FoodListScreen(navController = navController)
+                    }
+                    // Tela Relatórios
+                    composable("reports_screen") {
+                        ReportsScreen(navController = navController)
                     }
                 }
             }
         }
     }
 }
-

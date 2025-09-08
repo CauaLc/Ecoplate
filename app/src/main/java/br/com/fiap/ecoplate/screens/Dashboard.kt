@@ -17,16 +17,14 @@ import androidx.compose.material.icons.outlined.FoodBank
 import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import br.com.fiap.ecoplate.ui.theme.EcoPlateTheme
 
 val GreenColor = Color(0xFF4CAF50)
@@ -37,20 +35,8 @@ val LightGrayColor = Color(0xFFFAFAFB)
 val BackgroundColor = Color(0xFFFAFAFB)
 val BlackColor = Color(0xFF000000)
 
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            EcoPlateTheme {
-                DashboardScreen()
-            }
-        }
-    }
-}
-
 @Composable
-fun DashboardScreen() {
+fun DashboardScreen(navController: NavHostController) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         containerColor = BackgroundColor,
@@ -68,7 +54,7 @@ fun DashboardScreen() {
             Spacer(modifier = Modifier.height(24.dp))
             AlimentosCard()
             Spacer(modifier = Modifier.height(24.dp))
-            ResumoFinanceiroCard()
+            ResumoFinanceiroCard(navController = navController)
             Spacer(modifier = Modifier.height(24.dp))
         }
     }
@@ -178,7 +164,7 @@ fun FoodItemRow(icon: ImageVector, name: String, expiry: String, expiryColor: Co
 }
 
 @Composable
-fun ResumoFinanceiroCard() {
+fun ResumoFinanceiroCard(navController: NavHostController) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(containerColor = Color.White),
@@ -205,7 +191,7 @@ fun ResumoFinanceiroCard() {
             Spacer(modifier = Modifier.height(20.dp))
 
             OutlinedButton(
-                onClick = { /* TODO */ },
+                onClick = { navController.navigate("reports_screen") },
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(8.dp),
                 border = BorderStroke(1.dp, color = Color.Gray)
